@@ -10,11 +10,11 @@ function throttle(handler, delay) {
   delay = typeof delay === 'number' && delay >= 0 ? delay : 1000
   let lastTime = Date.now();
   
-  return function(args) {
+  return function(...args) {
     const ctx = this;
     const currentTime = Date.now()
     if (currentTime - lastTime >= delay) {
-      handler.call(ctx, args)
+      handler.apply(ctx, args)
       lastTime = currentTime
     }
   }
